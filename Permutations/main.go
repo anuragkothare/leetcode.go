@@ -1,6 +1,6 @@
-package main
-
 // https://leetcode.com/problems/permutations/
+
+package main
 
 import "fmt"
 
@@ -14,9 +14,7 @@ func permute(nums []int) [][]int {
 	if len(nums) == 1 {
 		return [][]int{nums}
 	}
-
 	var out [][]int
-
 	for i, val := range nums {
 		var copyNum = make([]int, len(nums)-1)
 		copy(copyNum, nums[:i])
@@ -26,6 +24,5 @@ func permute(nums []int) [][]int {
 			out = append(out, append([]int{val}, line...))
 		}
 	}
-
 	return out
 }
