@@ -5,9 +5,9 @@ package main
 import "fmt"
 
 func main() {
-	arr := []int{1, 7, 2, 9, 10}
+	arr := []int{3, 9, 7, 3}
 	n := len(arr)
-	k := 6
+	k := 13
 	res := subsetSumToK(n, k, &arr)
 	fmt.Println("Subset sum to", k, "exists:", res)
 }
@@ -26,7 +26,7 @@ func subsetSumToK(n int, k int, arr *[]int) bool {
 
 	for i := 1; i <= n; i++ {
 		for j := 1; j <= k; j++ {
-			if (*arr)[i-1] > k {
+			if (*arr)[i-1] > j {
 				dp[i][j] = dp[i-1][j]
 			} else {
 				dp[i][j] = dp[i-1][j] || dp[i-1][j-(*arr)[i-1]]
