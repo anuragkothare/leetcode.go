@@ -8,8 +8,11 @@ func main() {
 	capacity := 50
 
 	maxValue, includedItems := knapsackDP(values, weights, capacity)
+	maxValue2 := knapsackDP2(values, weights, capacity)
 	fmt.Println("Maximum value:", maxValue)
 	fmt.Println("Included items:", includedItems)
+
+	fmt.Println("Maximum value Using DP with space optimization", maxValue2)
 }
 
 func knapsackDP(values []int, weights []int, capacity int) (int, []int) {
@@ -42,6 +45,20 @@ func knapsackDP(values []int, weights []int, capacity int) (int, []int) {
 		i--
 	}
 	return dp[n][capacity], reverse(includedItems)
+
+}
+
+// With Space Optimization using single 1D array
+func knapsackDP2(values []int, weights []int, capacity int) int {
+	n := len(values)
+	dp := make([]int, capacity+1)
+
+	for i := 1; i <= n; i++ {
+		for w := capacity; w >= weights[i-1]; w-- {
+			dp[w] = max(values[i-1]+dp[w-weights[i-1]], dp[w])
+		}
+	}
+	return dp[capacity]
 
 }
 
